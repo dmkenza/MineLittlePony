@@ -10,11 +10,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.village.VillagerDataContainer;
 import net.minecraft.village.VillagerProfession;
 
+import com.minelittlepony.api.pony.meta.Race;
 import com.minelittlepony.client.model.entity.race.AlicornModel;
 import com.minelittlepony.client.render.entity.npc.PonyTextures;
 import com.minelittlepony.model.IPart;
 import com.minelittlepony.mson.api.ModelContext;
-import com.minelittlepony.pony.meta.Race;
 
 public class VillagerPonyModel<T extends LivingEntity & VillagerDataContainer> extends AlicornModel<T> implements ModelWithHat {
 

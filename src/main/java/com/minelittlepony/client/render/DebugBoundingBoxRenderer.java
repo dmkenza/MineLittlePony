@@ -13,7 +13,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
-import com.minelittlepony.pony.IPony;
+import com.minelittlepony.api.pony.IPony;
 
 public final class DebugBoundingBoxRenderer {
 
