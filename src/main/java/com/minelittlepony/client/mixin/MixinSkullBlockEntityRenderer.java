@@ -51,7 +51,7 @@ abstract class MixinSkullBlockEntityRenderer implements BlockEntityRenderer<Skul
     @Inject(method = "method_3578("
             + "Lnet/minecraft/block/SkullBlock$SkullType;"
             + "Lcom/mojang/authlib/GameProfile;"
-            + ")V", at = @At("HEAD"), cancellable = true)
+            + ")Lnet/minecraft/client/render/RenderLayer;", at = @At("HEAD"), cancellable = true)
     private static void onMethod_3578(SkullBlock.SkullType skullType, @Nullable GameProfile profile, CallbackInfoReturnable<RenderLayer> info) {
         if (info.isCancelled() || PonySkullRenderer.INSTANCE == null) {
             return;
