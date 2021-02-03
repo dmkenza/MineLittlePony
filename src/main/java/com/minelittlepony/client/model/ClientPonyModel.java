@@ -9,6 +9,7 @@ import net.minecraft.util.Hand;
 import com.minelittlepony.api.pony.IPony;
 import com.minelittlepony.api.pony.IPonyData;
 import com.minelittlepony.api.pony.meta.Size;
+import com.minelittlepony.api.pony.meta.Sizes;
 import com.minelittlepony.client.pony.PonyData;
 import com.minelittlepony.client.render.EquineRenderManager;
 import com.minelittlepony.model.ModelAttributes;
@@ -67,7 +68,7 @@ public abstract class ClientPonyModel<T extends LivingEntity> extends MsonPlayer
 
     @Override
     public Size getSize() {
-        return child ? Size.FOAL : getMetadata().getSize();
+        return child ? Sizes.FOAL : getMetadata().getSize();
     }
 
     @Override

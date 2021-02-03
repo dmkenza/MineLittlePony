@@ -2,7 +2,7 @@ package com.minelittlepony.client.model;
 
 import com.minelittlepony.client.model.armour.PonyArmourModel;
 import com.minelittlepony.api.pony.meta.Race;
-import com.minelittlepony.api.pony.meta.Size;
+import com.minelittlepony.api.pony.meta.Sizes;
 import com.minelittlepony.client.model.armour.ArmourWrapper;
 import com.minelittlepony.client.transform.PonyTransformation;
 import com.minelittlepony.model.BodyPart;
@@ -461,10 +461,10 @@ public abstract class AbstractPonyModel<T extends LivingEntity> extends ClientPo
                     arm.pivotX -= 6 * sigma;
                     arm.pivotZ -= 2;
                 }
-                if (getSize() == Size.TALL) {
+                if (getSize() == Sizes.TALL) {
                     arm.pivotY += 1;
                 }
-                if (getSize() == Size.FOAL) {
+                if (getSize() == Sizes.FOAL) {
                     arm.pivotY -= 2;
                 }
 
@@ -557,7 +557,7 @@ public abstract class AbstractPonyModel<T extends LivingEntity> extends ClientPo
 
     @Override
     public float getRiderYOffset() {
-        switch (getSize()) {
+        switch ((Sizes)getSize()) {
             case NORMAL: return 0.4F;
             case FOAL:
             case TALL:
