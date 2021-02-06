@@ -88,6 +88,8 @@ public class MineLittlePony implements ClientModInitializer {
 
         Channel.bootstrap();
         ModelType.bootstrap();
+
+        FabricLoader.getInstance().getEntrypoints("minelittlepony", ClientModInitializer.class).forEach(ClientModInitializer::onInitializeClient);
     }
 
     private void onClientReady(MinecraftClient client) {
