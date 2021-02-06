@@ -1,8 +1,6 @@
-package com.minelittlepony.model;
+package com.minelittlepony.api.model;
 
 import com.minelittlepony.api.pony.IPony;
-import com.minelittlepony.client.render.EquineRenderManager;
-import com.minelittlepony.client.render.EquineRenderManager.Mode;
 import com.minelittlepony.util.MathUtil;
 
 import net.minecraft.entity.LivingEntity;
@@ -12,8 +10,7 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.UUID;
 
-public class ModelAttributes<T extends LivingEntity> {
-
+public class ModelAttributes {
     /**
      * True if the model is sleeping in a bed.
      */
@@ -82,7 +79,7 @@ public class ModelAttributes<T extends LivingEntity> {
     /**
      * Checks flying and speed conditions and sets rainboom to true if we're a species with wings and is going faaast.
      */
-    public void checkRainboom(T entity, float swing, boolean hasWings) {
+    public void checkRainboom(LivingEntity entity, float swing, boolean hasWings) {
         Vec3d motion = entity.getVelocity();
         double zMotion = Math.sqrt(motion.x * motion.x + motion.z * motion.z);
 
@@ -92,16 +89,27 @@ public class ModelAttributes<T extends LivingEntity> {
         motionLerp = MathUtil.clampLimit(zMotion * 30, 1);
     }
 
-    public void updateLivingState(T entity, IPony pony, EquineRenderManager.Mode mode) {
+    public void updateLivingState(LivingEntity entity, IPony pony, Mode mode) {
         isSitting = pony.isSitting(entity);
         isCrouching = !isSitting && mode == Mode.THIRD_PERSON && pony.isCrouching(entity);
         isSleeping = entity.isSleeping();
         isFlying = mode == Mode.THIRD_PERSON && pony.isFlying(entity);
         isGliding = entity.isFallFlying();
         isSwimming = mode == Mode.THIRD_PERSON && pony.isSwimming(entity);
-        isSwimmingRotated = mode == Mode.THIRD_PERSON && isSwimming && (entity instanceof PlayerEntity || entity instanceof IRotatedSwimmer);
+        isSwimmingRotated = mode == Mode.THIRD_PERSON && isSwimming && (entity instanceof PlayerEntity || entity instanceof Swimmer);
         isRidingInteractive = pony.isRidingInteractive(entity);
         interpolatorId = entity.getUuid();
         isLeftHanded = entity.getMainArm() == Arm.LEFT;
+    }
+
+    public enum Mode {
+        FIRST_PERSON,
+        THIRD_PERSON
+    }
+
+    /**
+     * Special interface to mark entities that rotate horizontally when they swim.
+     */
+    public interface Swimmer {
     }
 }

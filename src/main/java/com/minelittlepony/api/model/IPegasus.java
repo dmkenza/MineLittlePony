@@ -1,9 +1,9 @@
-package com.minelittlepony.model;
+package com.minelittlepony.api.model;
 
 import net.minecraft.util.math.MathHelper;
 
-import static com.minelittlepony.model.PonyModelConstants.ROTATE_270;
-import static com.minelittlepony.model.PonyModelConstants.WING_ROT_Z_SNEAK;
+import static com.minelittlepony.api.model.PonyModelConstants.ROTATE_270;
+import static com.minelittlepony.api.model.PonyModelConstants.WING_ROT_Z_SNEAK;
 
 public interface IPegasus extends IModel {
 

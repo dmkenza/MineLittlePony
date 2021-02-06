@@ -6,13 +6,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 
+import com.minelittlepony.api.model.ModelAttributes;
 import com.minelittlepony.api.pony.IPony;
 import com.minelittlepony.api.pony.IPonyData;
 import com.minelittlepony.api.pony.meta.Size;
 import com.minelittlepony.api.pony.meta.Sizes;
 import com.minelittlepony.client.pony.PonyData;
-import com.minelittlepony.client.render.EquineRenderManager;
-import com.minelittlepony.model.ModelAttributes;
 import com.minelittlepony.mson.api.model.biped.MsonPlayer;
 
 /**
@@ -27,7 +26,7 @@ public abstract class ClientPonyModel<T extends LivingEntity> extends MsonPlayer
     /**
      * The model attributes.
      */
-    protected ModelAttributes<T> attributes = new ModelAttributes<>();
+    protected ModelAttributes attributes = new ModelAttributes();
 
     /**
      * Associated pony data.
@@ -44,7 +43,7 @@ public abstract class ClientPonyModel<T extends LivingEntity> extends MsonPlayer
     }
 
     @Override
-    public void updateLivingState(T entity, IPony pony, EquineRenderManager.Mode mode) {
+    public void updateLivingState(T entity, IPony pony, ModelAttributes.Mode mode) {
         child = entity.isBaby();
         attributes.updateLivingState(entity, pony, mode);
         sneaking = attributes.isCrouching;
@@ -57,7 +56,7 @@ public abstract class ClientPonyModel<T extends LivingEntity> extends MsonPlayer
     }
 
     @Override
-    public ModelAttributes<?> getAttributes() {
+    public ModelAttributes getAttributes() {
         return attributes;
     }
 
@@ -72,7 +71,7 @@ public abstract class ClientPonyModel<T extends LivingEntity> extends MsonPlayer
     }
 
     @Override
-    public void apply(IPonyData meta) {
+    public void setMetadata(IPonyData meta) {
         metadata = meta;
     }
 
