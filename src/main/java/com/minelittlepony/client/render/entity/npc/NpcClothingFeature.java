@@ -1,5 +1,6 @@
 package com.minelittlepony.client.render.entity.npc;
 
+import com.minelittlepony.client.MineLittlePony;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
@@ -31,6 +32,7 @@ import com.minelittlepony.client.render.entity.feature.AbstractPonyFeature;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 class NpcClothingFeature<
         T extends LivingEntity & VillagerDataContainer,
@@ -80,8 +82,8 @@ class NpcClothingFeature<
             M entityModel = getContextModel();
 
             entityModel.setHatVisible(
-                       profHatLayer == VillagerResourceMetadata.HatType.NONE
-                   || (profHatLayer == VillagerResourceMetadata.HatType.PARTIAL && typeHatLayer != VillagerResourceMetadata.HatType.FULL)
+                    profHatLayer == VillagerResourceMetadata.HatType.NONE
+                            || (profHatLayer == VillagerResourceMetadata.HatType.PARTIAL && typeHatLayer != VillagerResourceMetadata.HatType.FULL)
             );
 
             Identifier typeSkin = findTexture("type", Registry.VILLAGER_TYPE.getId(type));
@@ -93,12 +95,16 @@ class NpcClothingFeature<
             if (profession != VillagerProfession.NONE && !entity.isBaby()) {
                 Identifier professionSkin = findTexture("profession", Registry.VILLAGER_PROFESSION.getId(profession));
 
-                renderModel(entityModel, professionSkin, matrixStack, provider, i, entity, 1, 1, 1);
+                if (resourceManager.containsResource(professionSkin)) {
+                    renderModel(entityModel, professionSkin, matrixStack, provider, i, entity, 1, 1, 1);
+                }
 
                 if (profession != VillagerProfession.NITWIT) {
                     Identifier levelSkin = findTexture("profession_level", LEVEL_TO_ID.get(MathHelper.clamp(data.getLevel(), 1, LEVEL_TO_ID.size())));
 
-                    renderModel(entityModel, levelSkin, matrixStack, provider, i, entity, 1, 1, 1);
+                    if (resourceManager.containsResource(levelSkin)) {
+                        renderModel(entityModel, levelSkin, matrixStack, provider, i, entity, 1, 1, 1);
+                    }
                 }
             }
         }
@@ -107,8 +113,8 @@ class NpcClothingFeature<
     public <K> VillagerResourceMetadata.HatType getHatType(Object2ObjectMap<K, HatType> cache, String type, DefaultedRegistry<K> registry, K key) {
         if (cache.containsKey(key)) {
             return cache.get(key); // People often complain that villagers cause lag,
-                                   // so let's do better than Mojang and rather NOT go
-                                   // through all the lambda generations if we can avoid it.
+            // so let's do better than Mojang and rather NOT go
+            // through all the lambda generations if we can avoid it.
         }
         return loadHatType(cache, type, registry, key);
     }
@@ -120,7 +126,8 @@ class NpcClothingFeature<
                 if (meta != null) {
                     return meta.getHatType();
                 }
-            } catch (IOException e) { }
+            } catch (IOException e) {
+            }
             return HatType.NONE;
         });
     }
