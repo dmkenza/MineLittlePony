@@ -66,6 +66,8 @@ repositories {
 }
 
 dependencies {
+//    include fileTree(dir: 'libs', include: ['*.jar'])
+
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -92,6 +94,9 @@ dependencies {
     include("io.github.natanfudge:fabric-drawer:4.1.0-1.17.1")
 
     modImplementation "dev.emi:trinkets:${trinkets_version}"
+
+    modImplementation fileTree(dir: 'libs', include: ['*.jar'])
+    modImplementation("org.anarres:jcpp:1.4.14")
 }
 
 //

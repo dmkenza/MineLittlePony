@@ -1,5 +1,6 @@
 package com.minelittlepony.client.render;
 
+import com.kenza.KenzaInjector;
 import com.minelittlepony.api.pony.IPony;
 import com.minelittlepony.client.MineLittlePony;
 import com.minelittlepony.common.util.Color;
@@ -25,7 +26,7 @@ import net.minecraft.world.World;
 
 public class LevitatingItemRenderer {
 
-    private static int tint;
+    private static int tint = 0;
     private static boolean enabled;
 
     public static boolean isEnabled() {
@@ -36,7 +37,13 @@ public class LevitatingItemRenderer {
         if (!isEnabled()) {
             return RenderLayer.getEntityTranslucent(texture);
         }
-        return MagicGlow.getTintedTexturedLayer(texture, Color.r(tint), Color.g(tint), Color.b(tint), 0.8F);
+
+        if(KenzaInjector.INSTANCE.isIrisShadersEnabled()){
+            float s =1 ;
+            return MagicGlow.getTintedTexturedLayer(texture, Color.r(tint)/s, Color.g(tint)/s, Color.b(tint)/s, 0.15F);
+        }else{
+            return MagicGlow.getTintedTexturedLayer(texture, Color.r(tint), Color.g(tint), Color.b(tint), 0.8F);
+        }
     }
 
     public static RenderLayer getRenderLayer() {

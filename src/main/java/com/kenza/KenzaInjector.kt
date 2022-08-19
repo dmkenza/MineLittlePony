@@ -1,27 +1,28 @@
 package com.kenza
 
+import com.kenza.KenzaInjector.entityHasElytraFromTrinkets
 import com.minelittlepony.api.pony.meta.Race
 import com.minelittlepony.common.event.ScreenInitCallback
 import dev.emi.trinkets.api.TrinketsApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
-import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gui.screen.OpenToLanScreen
+import net.fabricmc.loader.api.FabricLoader
+import net.fabricmc.loader.api.MappingResolver
+import net.irisshaders.iris.api.v0.IrisApi
+//import net.irisshaders.iris.api.v0.IrisApi
 import net.minecraft.client.gui.screen.Screen
-import net.minecraft.client.gui.screen.TitleScreen
-import net.minecraft.client.gui.screen.world.CreateWorldScreen
-import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.sound.SoundEvents
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 import java.util.*
-import java.util.function.Predicate
 
 
 //summon minecraft:villager ~ ~ ~ {VillagerData:{level:1,profession:"minecraft:nitwit",type:"minecraft:desert"}}
@@ -37,7 +38,14 @@ object KenzaInjector {
 
     fun init() {
 
+
         ScreenInitCallback.EVENT.register(ScreenInitCallback { screen: Screen?, buttons: ScreenInitCallback.ButtonList? ->
+
+            GlobalScope.launch {
+                delay(5000)
+                test1()
+            }
+
 //            this.onScreenInit(
 //                screen,
 //                buttons
@@ -148,10 +156,34 @@ object KenzaInjector {
         }
     }
 
+
+    fun isIrisShadersEnabled(): Boolean {
+        return try {
+            IrisApi.getInstance().config.areShadersEnabled()
+        } catch (e: NoClassDefFoundError) {
+            false
+        }
+    }
+
 }
 
 fun Entity.canLoadDynamicPonySkin(): Boolean {
     return (this.toVillagerEntityExtension()?.ponySkinID ?: -1) >= 0
+}
+
+fun test1(){
+
+//    val resolver: MappingResolver = FabricLoader.getInstance().mappingResolver
+////    val cls = Class.forName(resolver.mapClassName("iris", "net.irisshaders.iris.api.v0.IrisApi"))
+//    val cls = Class.forName( "net/irisshaders/iris/api/v0/IrisApi")
+    val cls = Class.forName( "net.irisshaders.iris.api.v0.IrisApi")
+////    cls.newInstance()
+////    val method: Method = cls.getDeclaredMethod("getInstance(")
+////    method.invoke(cls.newInstance(), "TESTING")
+//
+//
+    val x1 = IrisApi.getInstance().config.areShadersEnabled()
+    cls
 }
 
 val <T> Optional<T>.value: T?
