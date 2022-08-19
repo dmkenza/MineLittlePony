@@ -41,11 +41,6 @@ object KenzaInjector {
 
         ScreenInitCallback.EVENT.register(ScreenInitCallback { screen: Screen?, buttons: ScreenInitCallback.ButtonList? ->
 
-            GlobalScope.launch {
-                delay(5000)
-                test1()
-            }
-
 //            this.onScreenInit(
 //                screen,
 //                buttons
@@ -169,21 +164,6 @@ object KenzaInjector {
 
 fun Entity.canLoadDynamicPonySkin(): Boolean {
     return (this.toVillagerEntityExtension()?.ponySkinID ?: -1) >= 0
-}
-
-fun test1(){
-
-//    val resolver: MappingResolver = FabricLoader.getInstance().mappingResolver
-////    val cls = Class.forName(resolver.mapClassName("iris", "net.irisshaders.iris.api.v0.IrisApi"))
-//    val cls = Class.forName( "net/irisshaders/iris/api/v0/IrisApi")
-    val cls = Class.forName( "net.irisshaders.iris.api.v0.IrisApi")
-////    cls.newInstance()
-////    val method: Method = cls.getDeclaredMethod("getInstance(")
-////    method.invoke(cls.newInstance(), "TESTING")
-//
-//
-    val x1 = IrisApi.getInstance().config.areShadersEnabled()
-    cls
 }
 
 val <T> Optional<T>.value: T?
