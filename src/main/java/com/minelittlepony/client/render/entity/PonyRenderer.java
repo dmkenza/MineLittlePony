@@ -152,7 +152,7 @@ public abstract class PonyRenderer<T extends MobEntity, M extends EntityModel<T>
 
     }
 
-    public abstract static class Caster<T extends MobEntity, M extends ClientPonyModel<T> & IUnicorn> extends PonyRenderer<T, M> {
+    public abstract static class Caster<T extends MobEntity, M extends ClientPonyModel<T>> extends PonyRenderer<T, M> {
 
         public Caster(EntityRendererFactory.Context context, ModelKey<? super M> key) {
             super(context, key);
