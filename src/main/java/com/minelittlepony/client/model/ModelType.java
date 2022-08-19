@@ -5,8 +5,7 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.ArmorStandEntityModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.VexEntity;
-import net.minecraft.entity.passive.AllayEntity;
-import net.minecraft.entity.passive.StriderEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.util.Identifier;
 
 import com.minelittlepony.api.model.gear.IGear;
@@ -14,19 +13,8 @@ import com.minelittlepony.api.pony.meta.Race;
 import com.minelittlepony.api.pony.meta.Wearable;
 import com.minelittlepony.client.model.armour.PonyArmourModel;
 import com.minelittlepony.client.model.entity.*;
-import com.minelittlepony.client.model.entity.race.AlicornModel;
-import com.minelittlepony.client.model.entity.race.ChangelingModel;
-import com.minelittlepony.client.model.entity.race.EarthPonyModel;
-import com.minelittlepony.client.model.entity.race.PegasusModel;
-import com.minelittlepony.client.model.entity.race.SeaponyModel;
-import com.minelittlepony.client.model.entity.race.UnicornModel;
-import com.minelittlepony.client.model.entity.race.ZebraModel;
-import com.minelittlepony.client.model.gear.AbstractGear;
-import com.minelittlepony.client.model.gear.ChristmasHat;
-import com.minelittlepony.client.model.gear.Muffin;
-import com.minelittlepony.client.model.gear.SaddleBags;
-import com.minelittlepony.client.model.gear.Stetson;
-import com.minelittlepony.client.model.gear.WitchHat;
+import com.minelittlepony.client.model.entity.race.*;
+import com.minelittlepony.client.model.gear.*;
 import com.minelittlepony.client.render.entity.PlayerPonyRenderer;
 import com.minelittlepony.client.render.entity.PlayerSeaponyRenderer;
 import com.minelittlepony.mson.api.ModelKey;
@@ -47,11 +35,9 @@ public final class ModelType {
 
     public static final ModelKey<DJPon3EarsModel> DJ_PON_3 = register("dj_pon_three", DJPon3EarsModel::new);
 
-    public static final ModelKey<VillagerPonyModel<?>> VILLAGER = register("villager", VillagerPonyModel::new);
     public static final ModelKey<WitchPonyModel> WITCH = register("witch", WitchPonyModel::new);
     public static final ModelKey<ZomponyModel<?>> ZOMBIE = register("zombie", ZomponyModel::new);
     public static final ModelKey<PiglinPonyModel> PIGLIN = register("piglin", PiglinPonyModel::new);
-    public static final ModelKey<ZomponyVillagerModel> ZOMBIE_VILLAGER = register("zombie_villager", ZomponyVillagerModel::new);
     public static final ModelKey<SkeleponyModel<?>> SKELETON = register("skeleton", SkeleponyModel::new);
     public static final ModelKey<SkeleponyModel<?>> SKELETON_CLOTHES = register("skeleton_clothes", SkeleponyModel::new);
     public static final ModelKey<PillagerPonyModel<?>> PILLAGER = register("pillager", PillagerPonyModel::new);
@@ -71,6 +57,7 @@ public final class ModelType {
 
     public static final ModelKey<Stetson> STETSON = registerGear("stetson", Wearable.STETSON, Stetson::new);
     public static final ModelKey<SaddleBags> SADDLEBAGS = registerGear("saddlebags", Wearable.SADDLE_BAGS, SaddleBags::new);
+    public static final ModelKey<Crown> CROWN = registerGear("crown", Wearable.CROWN, Crown::new);
     public static final ModelKey<Muffin> MUFFIN = registerGear("muffin", Wearable.MUFFIN, Muffin::new);
     public static final ModelKey<WitchHat> WITCH_HAT = registerGear("witch_hat", Wearable.HAT, WitchHat::new);
     public static final ModelKey<ChristmasHat> ANTLERS = registerGear("antlers", Wearable.ANTLERS, ChristmasHat::new);
@@ -86,7 +73,7 @@ public final class ModelType {
     public static final PlayerModelKey<?, PegasusModel<?>> BAT_PONY = registerPlayer("bat_pony", Race.BATPONY, PegasusModel::new);
     public static final PlayerModelKey<?, ChangelingModel<?>> CHANGELING = registerPlayer("changeling", Race.CHANGELING, ChangelingModel::new);
     public static final PlayerModelKey<?, ChangelingModel<?>> CHANGEDLING = registerPlayer("reformed_changeling", Race.CHANGEDLING, ChangelingModel::new);
-    public static final PlayerModelKey<?, ZebraModel<?>> ZEBRA = registerPlayer("zebra", Race.ZEBRA, ZebraModel::new);
+    public static final PlayerModelKey<?, EarthPonyModel<?>> ZEBRA = registerPlayer("zebra", Race.ZEBRA, EarthPonyModel::new);
 
     static <E extends LivingEntity, T extends Model & MsonModel> PlayerModelKey<E, T> registerPlayer(String name, Race race, BiFunction<ModelPart, Boolean, T> constructor) {
         return registerPlayer(name, race, constructor, PlayerPonyRenderer::new);

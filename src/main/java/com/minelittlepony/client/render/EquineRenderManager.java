@@ -82,7 +82,7 @@ public class EquineRenderManager<T extends LivingEntity, M extends EntityModel<T
         return rotationYaw;
     }
 
-    protected void translateRider(T entity, MatrixStack stack, float ticks) {
+    private void translateRider(T entity, MatrixStack stack, float ticks) {
         if (entity.hasVehicle() && entity.getVehicle() instanceof LivingEntity) {
 
             LivingEntity ridingEntity = (LivingEntity) entity.getVehicle();
@@ -139,8 +139,7 @@ public class EquineRenderManager<T extends LivingEntity, M extends EntityModel<T
     }
 
     public ModelWrapper<T, M> setModel(ModelKey<?> key) {
-        playerModel = ModelWrapper.of(key);
-        return playerModel;
+        return setModel(ModelWrapper.of(key));
     }
 
     public ModelWrapper<T, M> setModel(ModelWrapper<T, M> wrapper) {
