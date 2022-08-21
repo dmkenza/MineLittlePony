@@ -54,6 +54,7 @@ object KenzaRenderInjector {
         matrices.scale(-scale, -scale, scale)
 
         val professionName = passedEntity.toVillagerEntityExtension()?.professionName ?: ""
+        val ponySkinID = passedEntity.toVillagerEntityExtension()?.ponySkinID ?: ""
         val text1 = passedEntity.toVillagerEntityExtension()?.run {
 //            ponyName + ponySkinID
             ponyName
@@ -74,6 +75,10 @@ object KenzaRenderInjector {
             5f
         }
         var seeThrough = false
+
+        if(passedEntity.isBaby){
+            shiftY = 25f
+        }
 
 
         /** extra render text for Iris mod fix transparent problem */
