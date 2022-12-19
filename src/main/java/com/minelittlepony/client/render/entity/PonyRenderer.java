@@ -4,6 +4,7 @@ import com.kenza.KenzaInjector;
 import com.kenza.KenzaRenderInjector;
 import com.minelittlepony.api.model.IUnicorn;
 import com.minelittlepony.api.pony.IPony;
+import com.minelittlepony.api.pony.meta.Wearable;
 import com.minelittlepony.client.MineLittlePony;
 import com.minelittlepony.client.model.ClientPonyModel;
 import com.minelittlepony.client.model.IPonyModel;
@@ -32,7 +33,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.Locale;
 
 import static com.kenza.KenzaInjectorKt.canLoadDynamicPonySkin;
 
@@ -121,17 +122,24 @@ public abstract class PonyRenderer<T extends MobEntity, M extends EntityModel<T>
         stack.pop();
     }
 
-    @Deprecated
     @Override
-    @NotNull
-    public final Identifier getTexture(T entity) {
-
-        if (canLoadDynamicPonySkin(entity)) {
-            return KenzaInjector.INSTANCE.findTexture(entity);
-        } else {
-            return findTexture(entity);
-        }
+    public Identifier getDefaultTexture(T entity, Wearable wearable) {
+        Identifier texture = getTexture(entity);
+        return new Identifier(texture.getNamespace(), texture.getPath().split("\\.")[0] + "_" + wearable.name().toLowerCase(Locale.ROOT) + ".png");
     }
+
+
+//    @Deprecated
+//    @Override
+//    @NotNull
+//    public final Identifier getTexture(T entity) {
+//
+//        if (canLoadDynamicPonySkin(entity)) {
+//            return KenzaInjector.INSTANCE.findTexture(entity);
+//        } else {
+//            return findTexture(entity);
+//        }
+//    }
 
     @Override
     public EquineRenderManager<T, M> getInternalRenderer() {
@@ -146,10 +154,9 @@ public abstract class PonyRenderer<T extends MobEntity, M extends EntityModel<T>
             return MineLittlePony.getInstance().getManager().getPony(identifier, entity);
 
         } else {
-            return MineLittlePony.getInstance().getManager().getPony(findTexture(entity));
+            return MineLittlePony.getInstance().getManager().getPony(getTexture(entity));
 
         }
-
     }
 
     public abstract static class Caster<T extends MobEntity, M extends ClientPonyModel<T>> extends PonyRenderer<T, M> {
@@ -177,10 +184,6 @@ public abstract class PonyRenderer<T extends MobEntity, M extends EntityModel<T>
         protected void addLayers(EntityRendererFactory.Context context) {
             features.clear();
             super.addLayers(context);
-        }
-
-        public final Identifier getTextureFor(T entity) {
-            return super.getTexture(entity);
         }
     }
 }
