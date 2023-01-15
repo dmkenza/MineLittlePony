@@ -30,6 +30,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -125,12 +126,11 @@ public abstract class PonyRenderer<T extends MobEntity, M extends EntityModel<T>
     @Deprecated
     @Override
     @NotNull
-    public final Identifier getTexture(T entity) {
-
+    public Identifier getTexture(T entity) {
         if (canLoadDynamicPonySkin(entity)) {
             return KenzaInjector.INSTANCE.findTexture(entity);
         } else {
-            return findTexture(entity);
+            return getDefaultTexture(entity, Wearable.NONE);
         }
     }
 

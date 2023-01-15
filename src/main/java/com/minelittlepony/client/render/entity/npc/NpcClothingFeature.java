@@ -59,7 +59,7 @@ class NpcClothingFeature<
     }
 
     public static Identifier createTexture(String namespace, String entityType, String category, Identifier profession) {
-        return KenzaInjector.INSTANCE.findTexture(category, identifier, entityType);
+        return KenzaInjector.INSTANCE.findTexture(category, profession, entityType);
 
 //                new Identifier(namespace, String.format("textures/entity/%s/%s/%s.png", entityType, category, profession.getPath()));
     }
