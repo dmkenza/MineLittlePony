@@ -51,16 +51,23 @@ class NpcClothingFeature<
         entityType = type;
     }
 
+    @Deprecated(forRemoval = true)
     public static Identifier getClothingTexture(VillagerDataContainer entity, String entityType) {
         VillagerProfession profession = entity.getVillagerData().getProfession();
 
         return createTexture("minelittlepony", entityType, "profession", Registry.VILLAGER_PROFESSION.getId(profession));
     }
 
-    public static Identifier createTexture(String namespace, String entityType, String category, Identifier identifier) {
+    public static Identifier createTexture(String namespace, String entityType, String category, Identifier profession) {
         return KenzaInjector.INSTANCE.findTexture(category, identifier, entityType);
 
-//                new Identifier(namespace, String.format("textures/entity/%s/%s/%s.png", entityType, category, identifier.getPath()));
+//                new Identifier(namespace, String.format("textures/entity/%s/%s/%s.png", entityType, category, profession.getPath()));
+    }
+
+    public Identifier createTexture(VillagerDataContainer entity, String category) {
+        VillagerProfession profession = entity.getVillagerData().getProfession();
+
+        return createTexture(category, Registry.VILLAGER_PROFESSION.getId(profession));
     }
 
     public Identifier createTexture(String category, Identifier identifier) {

@@ -164,8 +164,8 @@ public class Pony implements IPony {
     }
 
     @Override
-    public Race getRace(boolean ignorePony) {
-        return getEffectiveRace(getMetadata().getRace(), ignorePony);
+    public Race getRace() {
+        return getEffectiveRace(getMetadata().getRace(), true);
     }
 
     @Override
@@ -259,6 +259,12 @@ public class Pony implements IPony {
      * PonyLevel.PONIES (should) return a pony if this is a human. Don't be fooled, though. It doesn't.
      */
     public static Race getEffectiveRace(Race race, boolean ignorePony) {
+
+        Race override = MineLittlePony.getInstance().getConfig().raceOverride.get();
+        if (override != Race.HUMAN) {
+            return override;
+        }
+
         if (MineLittlePony.getInstance().getConfig().getEffectivePonyLevel(ignorePony) == PonyLevel.HUMANS) {
             return Race.HUMAN;
         }

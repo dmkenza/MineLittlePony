@@ -19,9 +19,6 @@ class DummyPony extends DummyPlayer implements IPreviewModel, ModelAttributes.Sw
         super(world, textures);
     }
 
-    public void setWet(boolean wet) {
-    }
-
     @Override
     public boolean shouldUpdateRegistration(Pony pony) {
         return false;
@@ -39,7 +36,8 @@ class DummyPony extends DummyPlayer implements IPreviewModel, ModelAttributes.Sw
         }
         return MineLittlePony.getInstance().getManager()
                 .getPony(this)
-                .getRace(true)
-                .getModelId(super.getModel().contains("slim"));
+                .getMetadata()
+                .getRace()
+                .getModelId(getTextures().usesThinSkin());
     }
 }
