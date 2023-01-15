@@ -30,6 +30,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -122,10 +123,25 @@ public abstract class PonyRenderer<T extends MobEntity, M extends EntityModel<T>
         stack.pop();
     }
 
+//    @Deprecated
+//    @Override
+//    @NotNull
+//    public Identifier getTexture(T entity) {
+//        if (canLoadDynamicPonySkin(entity)) {
+//            return KenzaInjector.INSTANCE.findTexture(entity);
+//        } else {
+//            return getDefaultTexture(entity, Wearable.NONE);
+//        }
+//    }
+
     @Override
     public Identifier getDefaultTexture(T entity, Wearable wearable) {
-        Identifier texture = getTexture(entity);
-        return new Identifier(texture.getNamespace(), texture.getPath().split("\\.")[0] + "_" + wearable.name().toLowerCase(Locale.ROOT) + ".png");
+        if (canLoadDynamicPonySkin(entity)) {
+            return KenzaInjector.INSTANCE.findTexture(entity);
+        } else {
+            Identifier texture = getTexture(entity);
+            return new Identifier(texture.getNamespace(), texture.getPath().split("\\.")[0] + "_" + wearable.name().toLowerCase(Locale.ROOT) + ".png");
+        }
     }
 
 
