@@ -1,5 +1,6 @@
 package com.minelittlepony.client.render.entity.npc;
 
+import com.kenza.KenzaInjector;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.resource.ResourceManager;
@@ -15,6 +16,8 @@ import com.minelittlepony.util.ResourceUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.kenza.KenzaInjectorKt.canLoadDynamicPonySkin;
 
 /**
  * Cached pool of villager textures.
@@ -48,6 +51,12 @@ public class PonyTextures<T extends LivingEntity & VillagerDataContainer> implem
 
     @Override
     public Identifier supplyTexture(T entity) {
+
+        if (canLoadDynamicPonySkin(entity)) {
+            Identifier identifier = KenzaInjector.INSTANCE.findTexture(entity);
+            return identifier;
+        }
+
         if (isBestPony(entity)) {
             return entity.isBaby() ? egg2 : egg;
         }

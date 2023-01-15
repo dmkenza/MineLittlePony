@@ -87,7 +87,7 @@ public abstract class PonyRenderer<T extends MobEntity, M extends EntityModel<T>
 
     @Override
     public boolean shouldRender(T entity, Frustum visibleRegion, double camX, double camY, double camZ) {
-        return true; //super.shouldRender(entity, manager.getFrustrum(entity, visibleRegion), camX, camY, camZ);
+        return super.shouldRender(entity, manager.getFrustrum(entity, visibleRegion), camX, camY, camZ);
     }
 
     @Override
