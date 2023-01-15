@@ -18,10 +18,10 @@
     "MixinSpriteIdentifier",
     "MixinTexturedRenderLayers",
     "MixinPlayerPositionLookS2CPacket",
-    "MixinVillagerEntity",
     "MixinFeatureRenderer"
 
   ],
   "mixins": [
+    "MixinVillagerEntity"
   ]
 }

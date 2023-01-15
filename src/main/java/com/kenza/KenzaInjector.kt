@@ -39,13 +39,9 @@ object KenzaInjector {
     fun init() {
 
 
-        ScreenInitCallback.EVENT.register(ScreenInitCallback { screen: Screen?, buttons: ScreenInitCallback.ButtonList? ->
-
-//            this.onScreenInit(
-//                screen,
-//                buttons
-//            )
-        })
+//        ScreenInitCallback.EVENT.register(ScreenInitCallback { screen: Screen?, buttons: ScreenInitCallback.ButtonList? ->
+//
+//        })
 
         onEntityLoaded()
     }
@@ -88,11 +84,11 @@ object KenzaInjector {
 //            entity?.toVillagerSkinContainer()?.initSkinID()
 //        })
 //
-        ClientEntityEvents.ENTITY_LOAD.register(ClientEntityEvents.Load(object : (Entity, ClientWorld) -> Unit {
-            override fun invoke(entity: Entity, p2: ClientWorld) {
-//                entity.toVillagerSkinContainer()?.test2()
-            }
-        }))
+//        ClientEntityEvents.ENTITY_LOAD.register(ClientEntityEvents.Load(object : (Entity, ClientWorld) -> Unit {
+//            override fun invoke(entity: Entity, p2: ClientWorld) {
+////                entity.toVillagerSkinContainer()?.test2()
+//            }
+//        }))
 //
 //        ServerPlayConnectionEvents.JOIN.register(ServerPlayConnectionEvents.Join { handler: ServerPlayNetworkHandler, sender: PacketSender, server: MinecraftServer? ->
 //            val x1 = handler.player

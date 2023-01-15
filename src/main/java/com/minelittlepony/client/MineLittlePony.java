@@ -67,7 +67,6 @@ public class MineLittlePony implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        KenzaInjector.INSTANCE.init();
 
         hasHdSkins = FabricLoader.getInstance().isModLoaded("hdskins");
         hasModMenu = FabricLoader.getInstance().isModLoaded("modmenu");
